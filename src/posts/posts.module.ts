@@ -11,4 +11,3 @@ import { UsersModule } from '../users/users.module';
   controllers: [PostsController],
 })
 export class PostsModule {}
-

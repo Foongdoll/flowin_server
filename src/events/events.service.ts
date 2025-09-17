@@ -7,7 +7,8 @@ import { UsersService } from '../users/users.service';
 @Injectable()
 export class EventsService {
   constructor(
-    @InjectRepository(CalendarEvent) private readonly repo: Repository<CalendarEvent>,
+    @InjectRepository(CalendarEvent)
+    private readonly repo: Repository<CalendarEvent>,
     private readonly users: UsersService,
   ) {}
 
@@ -43,4 +44,3 @@ export class EventsService {
     return { ok: true };
   }
 }
-

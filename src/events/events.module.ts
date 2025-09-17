@@ -11,4 +11,3 @@ import { UsersModule } from '../users/users.module';
   controllers: [EventsController],
 })
 export class EventsModule {}
-

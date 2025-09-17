@@ -21,7 +21,14 @@ export class DocsService {
     return this.repo.findOne({ where: { id } });
   }
 
-  async create(data: { title: string; originalName: string; mime: string; size: number; path: string; userId?: string }) {
+  async create(data: {
+    title: string;
+    originalName: string;
+    mime: string;
+    size: number;
+    path: string;
+    userId?: string;
+  }) {
     const doc = this.repo.create(data);
     if (data.userId) {
       const user = await this.users.findById(data.userId);
@@ -35,4 +42,3 @@ export class DocsService {
     return { ok: true };
   }
 }
-

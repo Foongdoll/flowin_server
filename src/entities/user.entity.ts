@@ -1,8 +1,16 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Post } from './post.entity';
 import { Note } from './note.entity';
 import { CalendarEvent } from './calendar-event.entity';
 import { Document } from './document.entity';
+import { Friendship } from './friendship.entity';
 
 @Entity()
 export class User {
@@ -35,5 +43,10 @@ export class User {
 
   @OneToMany(() => Document, (d) => d.user)
   documents!: Document[];
-}
 
+  @OneToMany(() => Friendship, (f) => f.user)
+  friendships!: Friendship[];
+
+  @OneToMany(() => Friendship, (f) => f.friend)
+  friendedBy!: Friendship[];
+}

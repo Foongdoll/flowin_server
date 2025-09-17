@@ -24,10 +24,10 @@ class LoginDto {
 
 @Controller('auth')
 export class AuthController {
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {}
 
   @Post('register')
-  register(@Body() dto: RegisterDto) {    
+  register(@Body() dto: RegisterDto) {
     return this.auth.register(dto.email, dto.name, dto.password);
   }
 
@@ -42,4 +42,3 @@ export class AuthController {
     return this.auth.me(req.user.sub);
   }
 }
-

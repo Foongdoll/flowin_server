@@ -1,4 +1,10 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -24,7 +30,9 @@ export class Document {
   @CreateDateColumn()
   uploadedAt!: Date;
 
-  @ManyToOne(() => User, (u) => u.documents, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (u) => u.documents, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   user?: User | null;
 }
-

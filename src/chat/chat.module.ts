@@ -7,4 +7,3 @@ import { ChatController } from './chat.controller';
   controllers: [ChatController],
 })
 export class ChatModule {}
-

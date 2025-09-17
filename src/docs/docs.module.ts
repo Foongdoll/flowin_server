@@ -11,4 +11,3 @@ import { UsersModule } from '../users/users.module';
   controllers: [DocsController],
 })
 export class DocsModule {}
-

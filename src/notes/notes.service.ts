@@ -40,4 +40,3 @@ export class NotesService {
     return { ok: true };
   }
 }
-

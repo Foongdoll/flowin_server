@@ -1,4 +1,10 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -18,7 +24,10 @@ export class Post {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @ManyToOne(() => User, (u) => u.posts, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (u) => u.posts, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   user?: User | null;
 
   @Column({ type: 'text', nullable: true })

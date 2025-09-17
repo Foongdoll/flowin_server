@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post as HttpPost, Put, Query, UseGuards, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post as HttpPost,
+  Put,
+  Query,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { JwtAuthGuard } from '../auth/jwt.guard';
 
@@ -23,7 +34,16 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @HttpPost()
-  create(@Req() req: any, @Body() dto: { title: string; content: string; category: string; authorName?: string }) {
+  create(
+    @Req() req: any,
+    @Body()
+    dto: {
+      title: string;
+      content: string;
+      category: string;
+      authorName?: string;
+    },
+  ) {
     const userId = req.user?.sub as string | undefined;
     return this.posts.create({ ...dto, userId, authorName: dto.authorName });
   }
@@ -40,4 +60,3 @@ export class PostsController {
     return this.posts.remove(id);
   }
 }
-

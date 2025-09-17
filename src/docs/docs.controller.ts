@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
@@ -21,7 +32,8 @@ export class DocsController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: (req, file, cb) => cb(null, join(process.cwd(), 'uploads', 'docs')),
+        destination: (req, file, cb) =>
+          cb(null, join(process.cwd(), 'uploads', 'docs')),
         filename: (req, file, cb) => {
           const rand = randomBytes(8).toString('hex');
           cb(null, `${Date.now()}-${rand}${extname(file.originalname)}`);
@@ -29,7 +41,11 @@ export class DocsController {
       }),
     }),
   )
-  async upload(@Req() req: any, @UploadedFile() file: any, @Body('title') title?: string) {
+  async upload(
+    @Req() req: any,
+    @UploadedFile() file: any,
+    @Body('title') title?: string,
+  ) {
     const path = ['docs', file.filename].join('/');
     return this.docs.create({
       title: title || file.originalname,

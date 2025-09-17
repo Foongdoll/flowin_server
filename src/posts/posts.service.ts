@@ -22,7 +22,13 @@ export class PostsService {
     return this.repo.findOne({ where: { id } });
   }
 
-  async create(data: { title: string; content: string; category: string; userId?: string; authorName?: string }) {
+  async create(data: {
+    title: string;
+    content: string;
+    category: string;
+    userId?: string;
+    authorName?: string;
+  }) {
     const post = this.repo.create({
       title: data.title,
       content: data.content,
@@ -46,4 +52,3 @@ export class PostsService {
     return { ok: true };
   }
 }
-

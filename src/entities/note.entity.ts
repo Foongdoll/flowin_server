@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -18,7 +25,9 @@ export class Note {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @ManyToOne(() => User, (u) => u.notes, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (u) => u.notes, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   user?: User | null;
 }
-

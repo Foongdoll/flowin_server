@@ -30,7 +30,9 @@ export class CalendarEvent {
   @Column()
   end!: string; // ISO local string
 
-  @ManyToOne(() => User, (u) => u.events, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (u) => u.events, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   user?: User | null;
 }
-

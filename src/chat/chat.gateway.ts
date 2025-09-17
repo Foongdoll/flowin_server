@@ -9,10 +9,25 @@ import {
 import { Server, Socket } from 'socket.io';
 
 type ChatMsg =
-  | { id: string; from: 'me' | 'friend'; type: 'text'; text: string; at: number }
-  | { id: string; from: 'me' | 'friend'; type: 'image' | 'video'; uri: string; at: number };
+  | {
+      id: string;
+      from: 'me' | 'friend';
+      type: 'text';
+      text: string;
+      at: number;
+    }
+  | {
+      id: string;
+      from: 'me' | 'friend';
+      type: 'image' | 'video';
+      uri: string;
+      at: number;
+    };
 
-@WebSocketGateway({ namespace: '/chat', cors: { origin: true, credentials: true } })
+@WebSocketGateway({
+  namespace: '/chat',
+  cors: { origin: true, credentials: true },
+})
 export class ChatGateway implements OnGatewayConnection {
   @WebSocketServer() server!: Server;
 
@@ -35,7 +50,11 @@ export class ChatGateway implements OnGatewayConnection {
     @ConnectedSocket() client: Socket,
     @MessageBody() data: { room: string; msg: Omit<ChatMsg, 'id' | 'at'> },
   ) {
-    const full: ChatMsg = { id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, at: Date.now(), ...(data.msg as any) };
+    const full: ChatMsg = {
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      at: Date.now(),
+      ...(data.msg as any),
+    };
     const list = this.rooms.get(data.room) ?? [];
     list.push(full);
     this.rooms.set(data.room, list.slice(-200)); // cap
